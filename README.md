@@ -4,6 +4,8 @@
 
 Live plate: https://mizcausevic-dev.github.io/data-center-power-delivery-chain-explainer/
 
+Repository: https://github.com/mizcausevic-dev/data-center-power-delivery-chain-explainer
+
 ## What this is
 
 An interactive anatomy plate for Data-Center Power Delivery Chain. Play, scrub, or jump the five stages. The same frame always draws the same picture.
