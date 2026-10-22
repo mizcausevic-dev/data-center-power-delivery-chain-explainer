@@ -1,38 +1,67 @@
 # Data-Center Power Delivery Chain
 
-34-second frame-locked schematic explainer. 1,020 frames at 30 fps. The figure is a labeled cutaway, not a measurement and not a certified reference.
+Frame-accurate conceptual anatomy of one online double-conversion data-center power path, from utility AC to the computing load.
+
+**About:** Frame-accurate conceptual anatomy of an online double-conversion data-center power path, from utility AC to the computing load.
+
+**Topics:** `data-center` `power-distribution` `ups` `infrastructure` `explainer` `animation` `energy` `electrical` `anatomy` `visualization`
+
+## What the film is
+
+A 34-second plate. 30 frames per second. 1,020 frames, indexed 0 through 1019. The picture is a pure function of the frame index.
+
+Chosen boundary, and only this boundary:
+
+- one utility feed
+- one distribution step
+- one online double-conversion UPS module
+- one battery cabinet on a bidirectional converter into the DC link
+- one PDU drawn as distribution, with no transformer assumed
+- one rack section and its server power supplies
+
+Static bypass is drawn as a separate path with a permanent gap. It stays unselected for all 1,020 frames. Opening the input device does not close that gap. On this plate the bypass entrance is the same upstream feed, so an interrupted input is not a suitable bypass source. Maintenance bypass is named as a separate state and is not wired in.
+
+A direct battery-to-DC-link connection is a real design used by other products. It is not this film. Standby generation, parallel modules, economy mode, and a separate bypass feeder are outside the boundary.
+
+## How to run
+
+No build. Open `index.html`. GitHub Pages serves the `pages` branch.
+
+Add `?f=510` to pin a frame. Space plays and pauses. Arrow keys step.
+
+```bash
+node test/timeline.test.js
+```
+
+The test walks every frame. Bypass flow stays at none. Input share and discharge share sum to 1. Stored energy falls during the interruption and only partly recovers. Frames 940 through 1019 are the same picture.
+
+## Timing
+
+| Frames | Film time | What the plate does |
+| --- | --- | --- |
+| 0-149 | 0-5 s | Opens on a system already in normal service. Not a startup procedure. |
+| 150-299 | 5-10 s | Follows rectifier, DC link, inverter. Bypass stays open. |
+| 300-509 | 10-17 s | Reveals the battery interior and the converter. Does not perform a connection. |
+| 510-749 | 17-25 s | Depicts an input interruption. The battery supports the DC link. Bypass does not close. |
+| 750-939 | 25-31.3 s | Input returns, recharge is shown without a rate, then the view pulls back. |
+| 940-1019 | 31.3-34 s | Held overview. |
+
+Scale is enlarged. Electrical motion is slowed. The outage and the recharge are time-compressed. None of those treatments is a measured duration.
+
+## Safeguards
+
+Read `SAFEGUARDS-Cursor.md`. The same limits are on the page.
+
+## Reference
+
+U.S. Department of Energy, Best Practices Guide for Energy-Efficient Data Center Design, July 2024: https://www.energy.gov/sites/default/files/2024-07/best-practice-guide-data-center-design.pdf
+
+This repository does not copy the guide's figures and is not a DOE publication.
+
+## Pages
 
 Live plate: https://mizcausevic-dev.github.io/data-center-power-delivery-chain-explainer/
 
 Repository: https://github.com/mizcausevic-dev/data-center-power-delivery-chain-explainer
 
-## What this is
-
-An interactive anatomy plate for Data-Center Power Delivery Chain. Play, scrub, or jump the five stages. The same frame always draws the same picture.
-
-## What this is not
-
-- Explanatory schematic, not a certified engineering, medical, or product reference.
-- Cyan marks the primary pathway, gold marks energy or actuation, and violet marks sensing or state. These colors are overlays, not literal emission.
-- Scale changes, slow motion, and time compression are labeled on the figure.
-- This page does not add dimensions, efficiencies, certifications, vendor internals, or performance claims.
-- Verify the subject before any publication, purchase, safety, or clinical use.
-- The reference supports the underlying process or architecture. Camera moves, palette, cutaways, and timing are original illustrative directions, not experimentally validated observations. This brief is not a certified design, simulation result, medical recommendation, or claim about a specific commercial implementation.
-
-## Limits copied from the brief
-
-- Battery operation is not normal transfer to bypass. Finite energy.
-
-Mechanism reference: DOE  -  data-center design guide (https://www.energy.gov/sites/default/files/2024-07/best-practice-guide-data-center-design.pdf)
-
-## Run
-
-Open `index.html`. GitHub Pages serves this repository from the `pages` branch.
-
-## Conflict note
-
-The explainer brief fixes the palette and the single technical plate. A seven-theme dashboard switcher is not applied here.
-
-## Provenance
-
-Prompt p99. Component names on the plate come from that brief's stage lines. No extra specifications were added.
+Medium draft: `medium-article-Cursor.md`
